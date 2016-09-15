@@ -19,3 +19,12 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+import React from "react";
+import ReactDOM from "react-dom";
+import HelloMockup from "./components/hello_mockup"
+
+ReactDOM.render(
+    <HelloMockup/>,
+    document.getElementById("hello-mockup")
+    )
