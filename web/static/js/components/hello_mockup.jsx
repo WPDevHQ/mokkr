@@ -1,9 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const HelloMockup = props => <h1>{props.title}</h1>;
+const HelloMockup = props => <h1>{props.screenshot.url}</h1>;
 
 HelloMockup.propTypes = {
-  title: React.PropTypes.string,
+  screenshot: React.PropTypes.shape({
+    url: React.PropTypes.string.require,
+  }),
 };
 
-export default HelloMockup;
+const mapStateToProps = state => ({ screenshot: state.screenshot });
+
+export default connect(mapStateToProps)(HelloMockup);

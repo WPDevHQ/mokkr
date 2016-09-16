@@ -20,11 +20,17 @@ import 'phoenix_html';
 
 // import socket from './socket'
 
+import { render } from 'react-dom';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import HelloMockup from './components/hello_mockup';
+import { Provider } from 'react-redux';
+import App from './components/app';
+import configureStore from './store/configure_store';
 
-ReactDOM.render(
-  <HelloMockup title="Hello mockup!" />,
-  document.getElementById('hello-mockup')
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app-container')
 );
