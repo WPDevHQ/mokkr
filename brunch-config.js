@@ -53,6 +53,14 @@ exports.config = {
       presets: ["es2015", "react"],
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    postcss: {
+      processors: [
+        require('stylelint'),
+        require('postcss-cssnext'),
+        require('postcss-utilities'),
+        require('postcss-font-magician')
+      ]
     }
   },
 
