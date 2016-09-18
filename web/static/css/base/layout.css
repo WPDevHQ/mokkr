@@ -1,0 +1,8 @@
+.l-content {
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.l-content--wide {
+  max-width: 980px;
+}

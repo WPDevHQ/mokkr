@@ -1,0 +1,19 @@
+.m-postbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: center;
+  @mixin font_size_three;
+
+  .a-button {
+    margin-top: 16px;
+  }
+}
+
+.m-postbox__input {
+  flex: 1 0 268px;
+  margin-top: 16px;
+  margin-right: 16px;
+  padding: 0.5em;
+  border: 0;
+}

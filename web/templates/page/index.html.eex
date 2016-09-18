@@ -1,1 +1,12 @@
-<div id="app-container"></div>
+<div id="app-container">
+</div>
+
+<header class="m-page-header u-text-center">
+  <div class="l-content l-content--wide">
+    <h1 class="m-page-header__title">Create responsive mockups</h1>
+    <div class="m-postbox">
+      <input class="m-postbox__input" type="text" placeholder="https://google.com" />
+      <button class="a-button" type="submit">Generate</button>
+    </div>
+  </div>
+</header>
