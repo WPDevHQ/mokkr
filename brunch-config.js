@@ -57,6 +57,7 @@ exports.config = {
     postcss: {
       processors: [
         require('stylelint'),
+        require('postcss-import'),
         require('postcss-cssnext'),
         require('postcss-utilities'),
         require('postcss-font-magician')
