@@ -21,7 +21,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css": /^(web\/static\/css\/app.css)/
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -59,8 +61,7 @@ exports.config = {
         require('stylelint'),
         require('postcss-import'),
         require('postcss-cssnext'),
-        require('postcss-utilities'),
-        require('postcss-font-magician')
+        require('postcss-utilities')
       ]
     }
   },
