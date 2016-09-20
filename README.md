@@ -9,6 +9,19 @@ To start your Phoenix app:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+# Capturing screenshots
+
+In order to capture screenshots you will need selenium and phantomjs installed
+
+  * `npm install -g selenium-standalone@latest`
+  * `selenium-standalone install`
+  * `npm install -g phantomjs`
+  
+Then run selenium and phantomjs
+
+  * `selenium-standalone start`
+  * `phantomjs -w`
+
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
 ## Learn more
