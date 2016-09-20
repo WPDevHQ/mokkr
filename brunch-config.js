@@ -57,11 +57,15 @@ exports.config = {
       ignore: [/web\/static\/vendor/]
     },
     postcss: {
+      parser: [
+        require('postcss-scss')
+      ],
       processors: [
         require('stylelint'),
         require('postcss-import'),
         require('postcss-cssnext'),
-        require('postcss-utilities')
+        require('postcss-utilities'),
+        require('precss')
       ]
     }
   },
