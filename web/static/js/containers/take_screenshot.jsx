@@ -1,26 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUrl } from '../actions';
+import { fetchScreenshot } from '../actions';
 
-const takeScreenshot = ({ dispatch }) => {
+const takeScreenshot = ({ dispatch, mockup }) => {
   let input;
 
-  return (
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!input.value.trim()) {
+      return;
+    }
+    dispatch(fetchScreenshot(input.value));
+    input.value = '';
+  };
+
+  const setInput = (node) => {
+    input = node;
+  };
+
+  const loadingElement = (
+    <p>Loading</p>
+  );
+
+  const screenShotform = (
     <div>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (!input.value.trim()) {
-            return;
-          }
-          dispatch(setUrl(input.value));
-          input.value = '';
-        }}
+        onSubmit={onSubmit}
       >
         <input
-          ref={(node) => {
-            input = node;
-          }}
+          ref={setInput}
         />
         <button type="submit">
           Generate
@@ -28,12 +36,23 @@ const takeScreenshot = ({ dispatch }) => {
       </form>
     </div>
   );
+
+  if (mockup.isLoading) {
+    return loadingElement;
+  }
+
+  return screenShotform;
 };
 
 takeScreenshot.propTypes = {
   dispatch: React.PropTypes.func.isRequired,
+  mockup: React.PropTypes.shape({
+    isLoading: React.PropTypes.bool.require,
+  }),
 };
 
-const TakeScreenshot = connect()(takeScreenshot);
+const mapStateToProps = state => ({ mockup: state.mockup });
+
+const TakeScreenshot = connect(mapStateToProps)(takeScreenshot);
 
 export default TakeScreenshot;

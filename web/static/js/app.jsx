@@ -24,9 +24,7 @@ import { render } from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import App from './components/app';
-import configureStore from './store/configure_store';
-
-const store = configureStore();
+import store from './store/configure_store';
 
 render(
   <Provider store={store}>
