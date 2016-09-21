@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import screenshot from './screenshot';
+import mockup from './screenshot';
 
 const rootReducer = combineReducers({
-  screenshot,
+  mockup,
 });
 
 export default rootReducer;

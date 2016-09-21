@@ -1,19 +1,29 @@
-import { SET_URL } from '../actions';
+import { SET_SCREENSHOTS, LOADING_CHANGED } from '../actions';
 
 const initialState = {
+  isLoading: false,
   url: '',
+  screenshots: [],
 };
 
-function screenshot(state = initialState, action) {
+function mockup(state = initialState, action) {
   switch (action.type) {
-    case SET_URL:
+    case SET_SCREENSHOTS:
+      return Object.assign({},
+        state,
+        {
+          url: action.url,
+          screenshots: action.screenshots.map(s => ({ name: s.name, src: s.src })),
+        }
+      );
+    case LOADING_CHANGED:
       return Object.assign({},
           state,
-          { url: action.payload }
+          { isLoading: action.isLoading }
       );
     default:
       return state;
   }
 }
 
-export default screenshot;
+export default mockup;
