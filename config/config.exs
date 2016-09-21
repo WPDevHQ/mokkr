@@ -29,4 +29,4 @@ config :phoenix, :generators,
   binary_id: false
 
 # Configure hound
-config :hound, driver: "phantomjs"
+config :hound, driver: "selenium", browser: "firefox"
