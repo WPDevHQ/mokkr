@@ -25,7 +25,8 @@ defmodule Mockup.Screenshot do
     session = change_session_to(:os.system_time(:nano_seconds))
     navigate_to url
     execute_scroll
-    screenshots = Enum.map(@screensizes, &(capture_screenshot(&1)))
+    screenshots = @screensizes
+                  |> Enum.map(&(capture_screenshot(&1)))
                   |> Parallel.map(&(convert_screenshot(&1)))
     Hound.Helpers.Session.end_session(session)
     screenshots
@@ -38,7 +39,7 @@ defmodule Mockup.Screenshot do
   end
 
   defp convert_screenshot(%{name: name, height: height, width: width, path: path}) do
-    open(path) |> resize_to_fill("#{width}x#{height}") |> resize("#{width/2}x#{height/2}") |> save(in_place: true)
+    path |> open |> resize_to_fill("#{width}x#{height}") |> resize("#{width/2}x#{height/2}") |> save(in_place: true)
 
     {_, file_data} = File.read(path)
     File.rm(path)
