@@ -11,16 +11,22 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 # Capturing screenshots
 
-In order to capture screenshots you will need selenium and phantomjs installed
+In order to capture screenshots you will need selenium, firefox and xvfb installed
 
   * `npm install -g selenium-standalone@latest`
   * `selenium-standalone install`
-  * `npm install -g phantomjs`
-  
-Then run selenium and phantomjs
 
-  * `selenium-standalone start`
-  * `phantomjs -w`
+Copy the init.d xvfb script over
+
+  * `cp xvfb /etc/init.d/xvfb`
+  * `chmod +x /etc/init.d/xvfb` note that this may need to be run as sudo
+
+Make the startup script executable
+
+  * `chmod +x ./start.sh`
+
+Start the app
+  * `./start.sh`
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
