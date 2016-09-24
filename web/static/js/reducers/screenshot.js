@@ -1,4 +1,4 @@
-import { SET_SCREENSHOTS, LOADING_CHANGED } from '../actions';
+import { SET_SCREENSHOTS, LOADING_CHANGED, SET_URL } from '../actions';
 
 const initialState = {
   isLoading: false,
@@ -20,6 +20,11 @@ function mockup(state = initialState, action) {
       return Object.assign({},
           state,
           { isLoading: action.isLoading }
+      );
+    case SET_URL:
+      return Object.assign({},
+          state,
+          { url: action.url }
       );
     default:
       return state;

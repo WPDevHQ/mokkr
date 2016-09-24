@@ -19,21 +19,33 @@ const takeScreenshot = ({ dispatch, mockup }) => {
   };
 
   const loadingElement = (
-    <p>Loading</p>
+    <p>Loading {mockup.url}</p>
   );
 
+  const formStyles = {
+    display: "none"
+  }
+
   const screenShotform = (
-    <div>
-      <form
-        onSubmit={onSubmit}
-      >
+      <div className="m-postbox">
+        <form
+          id="screenshot_form"
+          style={formStyles}
+          onSubmit={onSubmit}
+        ></form>
         <input
+          className="m-postbox__input"
+          placeholder="https://google.com"
+          form="screenshot_form"
           ref={setInput}
         />
-        <button type="submit">
+        <button
+          className="a-button"
+          type="submit"
+          form="screenshot_form"
+        >
           Generate
         </button>
-      </form>
     </div>
   );
 

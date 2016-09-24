@@ -1,0 +1,10 @@
+.m-page-header {
+  background-image: url("/images/header-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.m-page-header__title {
+  @mixin font_size_five;
+}
