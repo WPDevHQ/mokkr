@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PreviewUrl from './preview_url';
 import ScreenshotPreview from './screenshot_preview';
 
 const preview = ({ screenshots }) => {
   return (
     <section>
-      <PreviewUrl />
       {screenshots.map(s => <ScreenshotPreview key={s.name} {...s} />) }
     </section>
   );
