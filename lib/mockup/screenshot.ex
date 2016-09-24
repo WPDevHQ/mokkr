@@ -1,35 +1,14 @@
 defmodule Mockup.Screenshot do
   use Hound.Helpers
   import Mogrify
-  alias Mockup.{Parallel}
 
-  @screensizes [
-      %{
-        name: "large",
-        height: 1080,
-        width: 1920
-      },
-      %{
-        name: "iPhone 6",
-        height: 667,
-        width: 375
-      },
-      %{
-        name: "iPad",
-        height: 660,
-        width: 1100,
-      },
-    ]
-
-  def capture(url) do
+  def capture(url, %{"name" => name, "height" => height, "width" => width}) do
     session = change_session_to(:os.system_time(:nano_seconds))
     navigate_to url
     execute_scroll
-    screenshots = @screensizes
-                  |> Enum.map(&(capture_screenshot(&1)))
-                  |> Parallel.map(&(convert_screenshot(&1)))
+    screenshot = capture_screenshot(%{name: name, height: height, width: width}) |> convert_screenshot
     Hound.Helpers.Session.end_session(session)
-    screenshots
+    screenshot
   end
 
   defp capture_screenshot(%{name: name, height: height, width: width}) do
