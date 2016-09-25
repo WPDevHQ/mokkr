@@ -5,13 +5,13 @@ import ScreenshotPreview from './screenshot_preview';
 const preview = ({ screenshots }) => {
   return (
     <section>
-      {screenshots.map(s => <ScreenshotPreview key={s.name} {...s} />) }
+      { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
     </section>
   );
 };
 
 preview.propTypes = {
-  screenshots: React.PropTypes.array.isRequired
+  screenshots: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({ screenshots: state.mockup.screenshots });

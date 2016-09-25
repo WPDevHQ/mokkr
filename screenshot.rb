@@ -59,15 +59,7 @@ path = "./#{SecureRandom.hex}.png"
 
 driver.save_screenshot(path)
 
-if (options[:height] && options[:width])
-  height = options[:height]
-  width = options[:width]
-else
-  height = driver.execute_script("return window.innerHeight;")
-  width = driver.execute_script("return window.innerWidth;")
-end
-
-result = {height: height, width: width, path: path}
+result = {path: path}
 print result.to_json
 
 driver.quit
