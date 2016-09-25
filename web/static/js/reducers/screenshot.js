@@ -1,19 +1,21 @@
-import { SET_SCREENSHOTS, LOADING_CHANGED, SET_URL } from '../actions';
+import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL } from '../actions';
 
 const initialState = {
+  channel: null,
+  sessionId: window.sessionId,
   isLoading: false,
-  url: '',
+  url: null,
   screenshots: [],
 };
 
 function mockup(state = initialState, action) {
   switch (action.type) {
-    case SET_SCREENSHOTS:
+    case SET_SCREENSHOT:
       return Object.assign({},
         state,
         {
-          url: action.url,
-          screenshots: action.screenshots.map(s => ({ name: s.name, src: s.src })),
+          isLoading: action.isLoading,
+          screenshots: action.screenshot.concat(state.screenshots),
         }
       );
     case LOADING_CHANGED:
@@ -24,7 +26,15 @@ function mockup(state = initialState, action) {
     case SET_URL:
       return Object.assign({},
           state,
-          { url: action.url }
+          {
+            url: action.url,
+            screenshots: [],
+          }
+      );
+    case SOCKET_CONNECTED:
+      return Object.assign({},
+          state,
+          { channel: action.channel }
       );
     default:
       return state;

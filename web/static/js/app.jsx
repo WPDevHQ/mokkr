@@ -18,8 +18,6 @@ import 'phoenix_html';
 // Local files can be imported directly using relative
 // paths './socket' or full ones 'web/static/js/socket'.
 
-// import socket from './socket'
-
 import { render } from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
