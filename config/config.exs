@@ -28,9 +28,6 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-# Configure hound
-config :hound, driver: "selenium", browser: "chrome"
-
 # Configure exq
 config :exq,
   host: "127.0.0.1",
