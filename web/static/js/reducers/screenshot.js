@@ -5,17 +5,41 @@ const initialState = {
   sessionId: window.sessionId,
   isLoading: false,
   url: null,
-  screenshots: [],
+  screenshots: {
+    iMac: {
+      background: 'images/imac.png',
+      src: '',
+      top: '34px',
+      left: '39px'
+    },
+    iPad: {
+      background: 'images/ipad-air.png',
+      src: '',
+      top: '43px',
+      left: '65px'
+    },
+    iPhone: {
+      background: 'images/iphone6.png',
+      src: '',
+      top: '39px',
+      left: '11px'
+    },
+  },
 };
 
 function mockup(state = initialState, action) {
   switch (action.type) {
     case SET_SCREENSHOT:
+      let originalScreenshots = state.screenshots;
+
       return Object.assign({},
         state,
         {
           isLoading: action.isLoading,
-          screenshots: action.screenshot.concat(state.screenshots),
+          screenshots: Object.assign({},
+              originalScreenshots,
+              action.screenshot
+          )
         }
       );
     case LOADING_CHANGED:
@@ -27,8 +51,7 @@ function mockup(state = initialState, action) {
       return Object.assign({},
           state,
           {
-            url: action.url,
-            screenshots: [],
+            url: action.url
           }
       );
     case SOCKET_CONNECTED:

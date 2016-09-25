@@ -54,7 +54,15 @@ export const setSocket = (() => (
     });
 
     channel.on('screenshot:complete', (screenshot) => {
-      let newScreenshot = [{name: screenshot.name, src: screenshot.src}];
+      let attrs = getState().mockup.screenshots[screenshot.name];
+
+      let newScreenshotAttrs = Object.assign({},
+          attrs,
+          { src: screenshot.src }
+      );
+
+      let newScreenshot = {};
+      newScreenshot[screenshot.name] = newScreenshotAttrs;
 
       dispatch({
         type: SET_SCREENSHOT,
