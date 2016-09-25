@@ -11,6 +11,7 @@ erl_crash.dump
 /node_modules
 npm-debug.log
 phantomjsdriver.log
+dump.rdb
 
 # Since we are building assets from web/static,
 # we ignore priv/static. You may want to comment

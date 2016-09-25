@@ -28,5 +28,12 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-# Configure hound
-config :hound, driver: "selenium", browser: "chrome"
+# Configure exq
+config :exq,
+  host: "127.0.0.1",
+  port: 6379,
+  namespace: "exq",
+  concurrency: 15,
+  scheduler_enable: true,
+  max_retries: 3,
+  queues: ["default"]
