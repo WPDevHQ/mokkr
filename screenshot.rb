@@ -29,7 +29,9 @@ prefs = {
 
 switches = %w[--ignore-certificate-errors --disable-translate]
 
-chrome_options = {}
+chrome_options = {
+  args: ['--no-sandbox']
+}
 
 if options[:device]
   mobile_emulation = { "deviceName" => options[:device] }
