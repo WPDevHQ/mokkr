@@ -1,35 +1,31 @@
 import React from 'react';
 
-const ScreenshotPreview = ({ background, src, top, left }) => {
+const ScreenshotPreview = ({ background, src, width, height, top, left, offsetTop, offsetLeft, screenshotWidth, screenshotHeight }) => {
   let screenshot;
 
   const containerStyles = {
-    position: 'relative',
-    left: 0,
-    top: 0
-  };
-
-  const deviceStyles = {
-    position: 'relative',
-    left: 0,
-    top: 0
+    width: width,
+    height: height,
+    left: left,
+    top: top
   };
 
   if (src.length != 0) {
     let screenshotStyles = {
-      position: 'absolute',
-      left: left,
-      top: top
+      left: offsetLeft,
+      top: offsetTop,
+      width: screenshotWidth,
+      height: screenshotHeight
     }
 
-    screenshot = <img style={screenshotStyles} role="presentation" src={`data:image/png;base64,${src}`} />;
+    screenshot = <image width={screenshotStyles.width} height={screenshotStyles.height} x={screenshotStyles.left} y={screenshotStyles.top} xlinkHref={`data:image/png;base64,${src}`} />;
   };
 
   return (
-  <div style={containerStyles}>
-    <img style={deviceStyles} role="presentation" src={background} />
+  <svg x={containerStyles.left} y={containerStyles.top}>
+    <image width={containerStyles.width} height={containerStyles.height} xlinkHref={background} />
     {screenshot}
-  </div>
+  </svg>
   )
 };
 

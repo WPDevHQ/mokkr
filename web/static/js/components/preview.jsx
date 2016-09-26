@@ -4,8 +4,12 @@ import ScreenshotPreview from './screenshot_preview';
 
 const preview = ({ screenshots }) => {
   return (
-    <section>
-      { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
+    <section className="l-content l-content--wide">
+      <div className="m-preview-canvas">
+        <svg className="m-scene" width="1135" height="875" viewBox="0 0 1135 875">
+          { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
+        </svg>
+      </div>
     </section>
   );
 };
