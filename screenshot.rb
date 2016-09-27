@@ -8,10 +8,6 @@ OptionParser.new do |opts|
     options[:url] = url
   end
 
-  opts.on("-dDEVICE", "--device=DEVICE", "Set device") do |device|
-    options[:device] = device
-  end
-
   opts.on("-wWIDTH", "--width=WIDTH", "Set width") do |width|
     options[:width] = width.to_i
   end
@@ -21,36 +17,29 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-prefs = {
-  :download => {
-    :prompt_for_download => false
-  }
-}
 
-switches = %w[--ignore-certificate-errors --disable-translate]
+profile = Selenium::WebDriver::Firefox::Profile.new
+profile.assume_untrusted_certificate_issuer = true
+profile.add_extension "default_responsive_design_view-0.1-fx.xpi"
+profile['browser.seesionstore.resume_from_crash'] = false
+profile['autoupdate.enabled'] = false
 
-chrome_options = {
-  args: ['--no-sandbox']
-}
+preset = [{
+  "width": options[:width],
+  "height": options[:height],
+  "key": "#{options[:width]}x#{options[:height]}",
+  "name": "Responsive preset"
+}].to_json
+profile['devtools.responsiveUI.presets'] = preset
 
-if options[:device]
-  mobile_emulation = { "deviceName" => options[:device] }
-  chrome_options["mobileEmulation"] = mobile_emulation
-end
-
-caps = Selenium::WebDriver::Remote::Capabilities.chrome(
-  prefs: prefs,
-  switches: switches,
-  "chromeOptions" => chrome_options)
+Selenium::WebDriver::Firefox::Binary.path = `which firefox`.chomp
+caps = Selenium::WebDriver::Remote::Capabilities.firefox(firefox_profile: profile)
 
 driver = Selenium::WebDriver.for(:remote, :desired_capabilities => caps)
 
-if (options[:width] && options[:height])
-  driver.manage.window.resize_to(options[:width], options[:height])
-end
+driver.manage.window.maximize
 
 driver.navigate.to options[:url]
-driver.execute_script("document.body.parentElement.style.overflow = 'hidden';")
 
 wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 wait.until {
@@ -65,4 +54,3 @@ result = {path: path}
 print result.to_json
 
 driver.quit
-

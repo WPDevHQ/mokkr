@@ -11,14 +11,14 @@ defmodule Mockup.Screenshot do
     },
     %{
       name: "iPhone",
-      options: ["--device=Apple iPhone 6"],
+      options: ["--height=667", "--width=375"],
       width: 375,
       height: 667,
       final_dimensions: "135x240"
     },
     %{
       name: "iPad",
-      options: ["--device=Apple iPad"],
+      options: ["--height=1025", "--width=768"],
       width: 768,
       height: 1024,
       final_dimensions: "300x400"
@@ -39,12 +39,7 @@ defmodule Mockup.Screenshot do
   defp convert_screenshot(%{"name" => name, "dimensions" => dimensions, "height" => height, "width" => width, "path" => path}) do
     path
     |> open
-    |> custom("crop", "#{width}x#{height}+0+0")
-    |> save(in_place: true)
-
-    path
-    |> open
-    |> resize(dimensions)
+    |> resize_to_fill(dimensions)
     |> save(in_place: true)
 
     {_, file_data} = File.read(path)
