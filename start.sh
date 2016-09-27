@@ -18,4 +18,5 @@ java -jar /opt/selenium/selenium-server-standalone.jar &
 SELENIUM_PID=$!
 redis-server &
 REDIS_PID=$!
+mix deps.get
 mix phoenix.server

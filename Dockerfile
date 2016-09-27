@@ -58,6 +58,7 @@ RUN npm install
 RUN bundle install
 RUN mix local.hex --force
 RUN mix deps.get --only-prod
+RUN mix local.rebar --force
 RUN mix compile
 EXPOSE 9515
 CMD ./start.sh
