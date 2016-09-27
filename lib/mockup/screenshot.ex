@@ -14,7 +14,7 @@ defmodule Mockup.Screenshot do
       options: ["--device=Apple iPhone 6"],
       width: 375,
       height: 667,
-      final_dimensions: "132x240"
+      final_dimensions: "135x240"
     },
     %{
       name: "iPad",
