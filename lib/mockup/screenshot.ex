@@ -24,7 +24,13 @@ defmodule Mockup.Screenshot do
   end
 
   def capture(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions}) do
-    {result, _} = System.cmd("ruby", ["screenshot.rb", "--url=#{url}"] ++ options)
+    formatted_url = unless url |> String.starts_with?("http") do
+      "http://" <> url
+    else
+      url
+    end
+
+    {result, _} = System.cmd("ruby", ["screenshot.rb", "--url=#{formatted_url}"] ++ options)
     data = Poison.Parser.parse!(result)
     Map.merge(data, %{"name" => name, "dimensions" => dimensions})
     |> convert_screenshot
