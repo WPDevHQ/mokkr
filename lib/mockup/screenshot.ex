@@ -5,22 +5,16 @@ defmodule Mockup.Screenshot do
     %{
       name: "iMac",
       options: ["--height=974", "--width=1730"],
-      width: 1730,
-      height: 974,
       final_dimensions: "865x487"
     },
     %{
       name: "iPhone",
       options: ["--height=667", "--width=375"],
-      width: 375,
-      height: 667,
       final_dimensions: "135x240"
     },
     %{
       name: "iPad",
       options: ["--height=1025", "--width=768"],
-      width: 768,
-      height: 1024,
       final_dimensions: "300x400"
     },
   ]
@@ -29,14 +23,14 @@ defmodule Mockup.Screenshot do
     @screensizes
   end
 
-  def capture(url, %{"name" => name, "options" => options, "width" => width, "height" => height,"final_dimensions" => dimensions}) do
+  def capture(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions}) do
     {result, _} = System.cmd("ruby", ["screenshot.rb", "--url=#{url}"] ++ options)
     data = Poison.Parser.parse!(result)
-    Map.merge(data, %{"name" => name, "dimensions" => dimensions, "width" => width, "height" => height})
+    Map.merge(data, %{"name" => name, "dimensions" => dimensions})
     |> convert_screenshot
   end
 
-  defp convert_screenshot(%{"name" => name, "dimensions" => dimensions, "height" => height, "width" => width, "path" => path}) do
+  defp convert_screenshot(%{"name" => name, "dimensions" => dimensions, "path" => path}) do
     path
     |> open
     |> resize_to_fill(dimensions)
