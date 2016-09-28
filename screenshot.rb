@@ -15,6 +15,10 @@ OptionParser.new do |opts|
   opts.on("-hHEIGHT", "--height=HEIGHT", "Set height") do |height|
     options[:height] = height.to_i
   end
+
+  opts.on("-uaUSERAGENT", "--useragent=USERAGENT", "Set useragent") do |user_agent|
+    options[:user_agent] = user_agent
+  end
 end.parse!
 
 
@@ -23,6 +27,10 @@ profile.assume_untrusted_certificate_issuer = true
 profile.add_extension "default_responsive_design_view-0.1-fx.xpi"
 profile['browser.seesionstore.resume_from_crash'] = false
 profile['autoupdate.enabled'] = false
+
+if options[:user_agent]
+  profile['general.useragent.override'] = options[:user_agent]
+end
 
 preset = [{
   "width": options[:width],
@@ -45,6 +53,8 @@ wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 wait.until {
   driver.execute_script("return document.readyState;") == "complete"
 }
+
+sleep 1
 
 path = "./#{SecureRandom.hex}.png"
 
