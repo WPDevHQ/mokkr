@@ -11,9 +11,8 @@ function cleanup {
 
 trap cleanup EXIT
 export DISPLAY=:99
+/etc/init.d/xvfb stop
 /etc/init.d/xvfb start
-chromedriver &
-CHROMEDRIVER_PID=$!
 java -jar /opt/selenium/selenium-server-standalone.jar &
 SELENIUM_PID=$!
 redis-server &
