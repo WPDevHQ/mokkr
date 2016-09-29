@@ -12,7 +12,7 @@ defmodule Mockup.Screenshot do
       options: [
         "--height=667",
         "--width=375",
-        "--useragent=Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.16 (KHTML, like Gecko) Version/8.0 Mobile/13A171a Safari/600.1.4"
+        "--useragent=Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"
       ],
       final_dimensions: "135x240"
     },
@@ -21,7 +21,7 @@ defmodule Mockup.Screenshot do
       options: [
         "--height=1025",
         "--width=768",
-        "--useragent=Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"
+        "--useragent=Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.16 (KHTML, like Gecko) Version/8.0 Mobile/13A171a Safari/600.1.4"
       ],
       final_dimensions: "300x400"
     },
