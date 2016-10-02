@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ScreenshotPreview from './screenshot_preview';
+import DownloadMockup from './download_mockup';
 
 const preview = ({ screenshots }) => {
   return (
@@ -10,6 +11,7 @@ const preview = ({ screenshots }) => {
           { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
         </svg>
       </div>
+      <DownloadMockup previewClass="m-scene" />
     </section>
   );
 };
