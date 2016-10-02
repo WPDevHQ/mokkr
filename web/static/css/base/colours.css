@@ -1,2 +1,6 @@
 $color-black: #3a3a3a;
-$color-purple: #724488;
+$color-light-grey: #eee;
+$color-dark-grey: #999;
+$color-purple: #4e3275;
+$color-pink: #984ba5;
+$color-pink-darker: color(#984ba5 lightness(- 5%));

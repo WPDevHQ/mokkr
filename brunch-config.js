@@ -90,7 +90,8 @@ exports.config = {
       "redux-thunk",
       "canvg-origin",
       "file-saver",
-      "blueimp-canvas-to-blob"
+      "blueimp-canvas-to-blob",
+      "snapsvg"
     ]
   }
 };

@@ -18,7 +18,7 @@
   }
 }
 
-@define-mixin font_size_three $fixed:false:false {
+@define-mixin font_size_three $fixed:false {
   @if $fixed == true {
     font-size: 18px;
   }

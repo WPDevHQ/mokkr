@@ -11,16 +11,11 @@ const takeScreenshot = ({ dispatch, mockup }) => {
       return;
     }
     dispatch(fetchScreenshot(input.value));
-    input.value = '';
   };
 
   const setInput = (node) => {
     input = node;
   };
-
-  const loadingElement = (
-    <p>Loading {mockup.url}</p>
-  );
 
   const formStyles = {
     display: 'none',
@@ -33,25 +28,25 @@ const takeScreenshot = ({ dispatch, mockup }) => {
         style={formStyles}
         onSubmit={onSubmit}
       />
-      <input
-        className="m-postbox__input"
-        placeholder="https://google.com"
-        form="screenshot_form"
-        ref={setInput}
-      />
-      <button
-        className="a-button"
-        type="submit"
-        form="screenshot_form"
-      >
-        Generate
-      </button>
+      <fieldset className="m-postbox__fieldset" disabled={mockup.isLoading}>
+        <div role="group">
+          <input
+            className="m-postbox__input"
+            placeholder="https://google.com"
+            form="screenshot_form"
+            ref={setInput}
+          />
+          <button
+            className="a-button"
+            type="submit"
+            form="screenshot_form"
+          >
+            Generate
+          </button>
+        </div>
+      </fieldset>
     </div>
   );
-
-  if (mockup.isLoading) {
-    return loadingElement;
-  }
 
   return screenShotform;
 };
