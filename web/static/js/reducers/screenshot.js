@@ -16,7 +16,7 @@ const initialState = {
       offsetTop: '34',
       offsetLeft: '39',
       screenshotWidth: '865',
-      screenshotHeight: '487'
+      screenshotHeight: '487',
     },
     iPad: {
       background: 'images/ipad-air.png',
@@ -28,7 +28,7 @@ const initialState = {
       offsetTop: '43',
       offsetLeft: '65',
       screenshotWidth: '300',
-      screenshotHeight: '400'
+      screenshotHeight: '400',
     },
     iPhone: {
       background: 'images/iphone6.png',
@@ -40,7 +40,7 @@ const initialState = {
       offsetTop: '39',
       offsetLeft: '11',
       screenshotWidth: '135',
-      screenshotHeight: '240'
+      screenshotHeight: '240',
     },
   },
 };
@@ -48,16 +48,14 @@ const initialState = {
 function mockup(state = initialState, action) {
   switch (action.type) {
     case SET_SCREENSHOT:
-      let originalScreenshots = state.screenshots;
-
       return Object.assign({},
         state,
         {
           isLoading: action.isLoading,
           screenshots: Object.assign({},
-              originalScreenshots,
+              state.screenshots,
               action.screenshot
-          )
+          ),
         }
       );
     case LOADING_CHANGED:
@@ -67,10 +65,10 @@ function mockup(state = initialState, action) {
       );
     case SET_URL:
       return Object.assign({},
-          state,
-          {
-            url: action.url
-          }
+        initialState,
+        {
+          url: action.url,
+        }
       );
     case SOCKET_CONNECTED:
       return Object.assign({},

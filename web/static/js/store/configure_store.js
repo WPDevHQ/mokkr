@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { setSocket } from '../actions';
 import thunk from 'redux-thunk';
+import { setSocket } from '../actions';
 import rootReducer from '../reducers';
 
 const store = createStore(

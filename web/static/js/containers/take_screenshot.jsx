@@ -23,29 +23,29 @@ const takeScreenshot = ({ dispatch, mockup }) => {
   );
 
   const formStyles = {
-    display: "none"
-  }
+    display: 'none',
+  };
 
   const screenShotform = (
-      <div className="m-postbox">
-        <form
-          id="screenshot_form"
-          style={formStyles}
-          onSubmit={onSubmit}
-        ></form>
-        <input
-          className="m-postbox__input"
-          placeholder="https://google.com"
-          form="screenshot_form"
-          ref={setInput}
-        />
-        <button
-          className="a-button"
-          type="submit"
-          form="screenshot_form"
-        >
-          Generate
-        </button>
+    <div className="m-postbox">
+      <form
+        id="screenshot_form"
+        style={formStyles}
+        onSubmit={onSubmit}
+      />
+      <input
+        className="m-postbox__input"
+        placeholder="https://google.com"
+        form="screenshot_form"
+        ref={setInput}
+      />
+      <button
+        className="a-button"
+        type="submit"
+        form="screenshot_form"
+      >
+        Generate
+      </button>
     </div>
   );
 
