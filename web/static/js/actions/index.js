@@ -62,8 +62,9 @@ export const setSocket = (() => (
           { src: screenshot.src }
       );
 
-      const newScreenshot = {};
-      newScreenshot[screenshot.name] = newScreenshotAttrs;
+      const newScreenshot = {
+        [screenshot.name]: newScreenshotAttrs,
+      };
 
       dispatch({
         type: SET_SCREENSHOT,

@@ -3,7 +3,7 @@ import canvg from 'canvg-origin';
 import { saveAs } from 'file-saver';
 import 'blueimp-canvas-to-blob';
 
-const DownloadMockup = ({ previewClass }) => {
+const DownloadMockup = ({ previewClass, downloadable }) => {
   const download = () => {
     const svg = document.getElementsByClassName(previewClass)[0];
     const canvas = document.createElement('canvas');
@@ -16,6 +16,10 @@ const DownloadMockup = ({ previewClass }) => {
     } });
   };
 
+  if (!downloadable) {
+    return null;
+  }
+
   return (
     <button onClick={download}>Download</button>
   );
@@ -23,6 +27,7 @@ const DownloadMockup = ({ previewClass }) => {
 
 DownloadMockup.propTypes = {
   previewClass: React.PropTypes.string.isRequired,
+  downloadable: React.PropTypes.bool.isRequired,
 };
 
 export default DownloadMockup;
