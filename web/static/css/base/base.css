@@ -26,10 +26,33 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0;
+  margin-top: 1.5em;
   font-weight: 300;
+  line-height: 1.15;
 }
 
 input {
   color: $color-black;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+li,
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: $color-pink;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px dotted transparent;
+  transition: color ease-in 0.3s, border-bottom ease-in 0.3s;
+
+  &:hover {
+    color: $color-pink-darker;
+    border-bottom: 1px dotted $color-pink-darker;
+  }
 }

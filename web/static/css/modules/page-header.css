@@ -4,6 +4,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   color: white;
+  overflow: hidden;
 
   .l-content {
     position: relative;

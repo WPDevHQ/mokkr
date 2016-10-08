@@ -67,3 +67,34 @@
     font-size: 2.5rem;
   }
 }
+
+.text-content {
+  h1 {
+    @mixin font_size_six;
+  }
+
+  h2 {
+    @mixin font_size_five;
+  }
+
+  h3 {
+    @mixin font_size_four;
+  }
+
+  h4 {
+    @mixin font_size_three;
+  }
+
+  h5 {
+    @mixin font_size_two;
+  }
+
+  h6 {
+    @mixin font_size_one;
+  }
+
+  p,
+  li {
+    @mixin font_size_three;
+  }
+}

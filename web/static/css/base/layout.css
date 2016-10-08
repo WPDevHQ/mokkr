@@ -1,8 +1,10 @@
-.l-content {
-  margin: 0 auto;
-  padding: 3rem 1rem;
+.l-section-alt {
+  background-color: $color-white-smoke;
+  overflow: hidden;
 }
 
-.l-content--wide {
+.l-content {
   max-width: 980px;
+  margin: 3rem auto;
+  padding: 0 1rem;
 }

@@ -45,7 +45,7 @@ class pageHeader extends React.Component {
     return (
       <header className="m-page-header u-text-center">
         <svg className="m-page-header__gears" id="header-svg" />
-        <div className="l-content l-content--wide">
+        <div className="l-content">
           <h1 className="m-page-header__title">Create responsive mockups</h1>
           <TakeScreenshot />
         </div>
