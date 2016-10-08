@@ -21,7 +21,7 @@ const DownloadMockup = ({ previewClass, downloadable }) => {
   }
 
   return (
-    <button onClick={download}>Download</button>
+    <button className="a-button" onClick={download}>Download image</button>
   );
 };
 

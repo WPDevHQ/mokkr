@@ -11,7 +11,7 @@ const preview = ({ screenshots }) => {
   );
 
   return (
-    <section className="l-content l-content--wide">
+    <section className="l-content l-content--wide u-text-center">
       <div className="m-preview-canvas">
         <svg className="m-scene" width="1135" height="875" viewBox="0 0 1135 875">
           { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }

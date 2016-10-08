@@ -1,14 +1,18 @@
 .a-button {
-  padding: 0.5em;
+  padding: 0.5em 0.6em;
   border: 0;
   background-color: $color-pink;
   color: white;
   cursor: pointer;
   transition: background-color ease-in 0.3s;
 
-  .m-postbox__fieldset:not(:disabled) & {
+  &:hover {
+    background-color: $color-pink-darker;
+  }
+
+  .m-postbox__fieldset:disabled & {
     &:hover {
-      background-color: $color-pink-darker;
+      background-color: $color-pink;
     }
   }
 
