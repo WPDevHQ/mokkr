@@ -5,13 +5,19 @@ import 'blueimp-canvas-to-blob';
 
 const DownloadMockup = ({ previewClass, downloadable }) => {
   const download = () => {
-    const svg = document.getElementsByClassName(previewClass)[0];
+    let svg = document.getElementsByClassName(previewClass)[0];
+    svg = svg.cloneNode(true);
+    svg.style.width = null;
+    svg.style.height = null;
+
     const canvas = document.createElement('canvas');
     canvas.height = svg.getAttribute('height');
     canvas.width = svg.getAttribute('width');
-    canvg(canvas, svg.parentNode.innerHTML.trim(), { renderCallback: () => {
+    canvg(canvas, svg.outerHTML.trim(), { renderCallback: () => {
       canvas.toBlob((blob) => {
         saveAs(blob, 'mockup.png');
+        canvas.remove();
+        svg.remove();
       });
     } });
   };
