@@ -10,7 +10,7 @@ const AboutSection = () => (
         <li>Use your mockup for absolutely whatever you want!</li>
       </ol>
 
-      <h2>About mockup generator</h2>
+      <h2>About Responsive Mockr</h2>
       <p>
         Created by <a href="https://twitter.com/juweez">@juweez</a> and <a href="https://twitter.com/wannabefro">@wannabefro</a>, this free online tool is a huge
         time saver for web developers and designers.
