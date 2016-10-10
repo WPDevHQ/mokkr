@@ -35,5 +35,5 @@ config :exq,
   namespace: "exq",
   concurrency: 15,
   scheduler_enable: true,
-  max_retries: 3,
+  max_retries: 0,
   queues: ["default"]
