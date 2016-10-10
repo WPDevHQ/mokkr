@@ -51,7 +51,6 @@ function mockup(state = initialState, action) {
       return Object.assign({},
         state,
         {
-          isLoading: action.isLoading,
           screenshots: Object.assign({},
               state.screenshots,
               action.screenshot

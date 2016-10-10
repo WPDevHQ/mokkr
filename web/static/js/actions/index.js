@@ -35,6 +35,12 @@ export const fetchScreenshot = (url => (
   }
 ));
 
+const finishedLoading = (screenshots => (
+  Object.keys(screenshots).every(s => (
+    screenshots[s].src.length !== 0
+  ))
+));
+
 export const setSocket = (() => (
   (dispatch, getState) => {
     const generateId = () => (
@@ -69,8 +75,16 @@ export const setSocket = (() => (
       dispatch({
         type: SET_SCREENSHOT,
         screenshot: newScreenshot,
-        isLoading: false,
       });
+
+      const screenshots = getState().mockup.screenshots;
+
+      if (finishedLoading(screenshots)) {
+        dispatch({
+          type: LOADING_CHANGED,
+          isLoading: false,
+        });
+      }
     });
   }
 ));
