@@ -44,7 +44,7 @@ const finishedLoading = (screenshots => (
 export const setSocket = (() => (
   (dispatch, getState) => {
     const generateId = () => (
-      `_ ${Math.random().toString(36).substr(2, 9)}`
+      `_${Math.random().toString(36).substr(2, 9)}`
     );
 
     const sessionId = generateId();
@@ -52,11 +52,12 @@ export const setSocket = (() => (
     const socket = new Socket('/socket', { params: { sessionId } });
     socket.connect();
 
-    const channel = socket.channel(`screenshots:${window.sessionId}`, {});
+    const channel = socket.channel(`screenshots:${sessionId}`, {});
     channel.join().receive('ok', () => {
       dispatch({
         type: SOCKET_CONNECTED,
         channel,
+        sessionId,
       });
     });
 

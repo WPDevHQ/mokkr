@@ -2,7 +2,7 @@ import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL } from '../a
 
 const initialState = {
   channel: null,
-  sessionId: window.sessionId,
+  sessionId: null,
   isLoading: false,
   url: null,
   screenshots: {
@@ -71,8 +71,11 @@ function mockup(state = initialState, action) {
       );
     case SOCKET_CONNECTED:
       return Object.assign({},
-          state,
-          { channel: action.channel }
+        state,
+        {
+          channel: action.channel,
+          sessionId: action.sessionId,
+        }
       );
     default:
       return state;
