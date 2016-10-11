@@ -5,24 +5,27 @@ defmodule Mockup.Screenshot do
     %{
       name: "iMac",
       options: ["--height=974", "--width=1730"],
+      crop_dimensions: "1920x1080",
       final_dimensions: "865x487"
     },
     %{
       name: "iPhone",
       options: [
+        "--device=Apple iPhone 6",
         "--height=667",
         "--width=375",
-        "--useragent=Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13C75 Safari/601.1"
       ],
+      crop_dimensions: "375x667",
       final_dimensions: "135x240"
     },
     %{
       name: "iPad",
       options: [
+        "--device=Apple iPad",
         "--height=1025",
         "--width=768",
-        "--useragent=Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.16 (KHTML, like Gecko) Version/8.0 Mobile/13A171a Safari/600.1.4"
       ],
+      crop_dimensions: "768x1025",
       final_dimensions: "300x400"
     },
   ]
@@ -31,24 +34,26 @@ defmodule Mockup.Screenshot do
     @screensizes
   end
 
-  def capture(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions}) do
+  def capture(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions, "crop_dimensions" => crop_dimensions}) do
     formatted_url = if url |> String.starts_with?("http") do
       url
     else
       "http://" <> url
     end
 
-    {result, _} = System.cmd("ruby", ["screenshot.rb", "--url=#{formatted_url}"] ++ options)
+    {result, _} = System.cmd("ruby", ["saucelabs.rb", "--url=#{formatted_url}"] ++ options)
     result
     |> Poison.Parser.parse!
-    |> Map.merge(%{"name" => name, "dimensions" => dimensions})
+    |> Map.merge(%{"name" => name, "dimensions" => dimensions, "crop_dimensions" => crop_dimensions})
     |> convert_screenshot
   end
 
-  defp convert_screenshot(%{"name" => name, "dimensions" => dimensions, "path" => path}) do
+  defp convert_screenshot(%{"name" => name, "crop_dimensions" => crop_dimensions, "dimensions" => dimensions, "path" => path}) do
     path
     |> open
-    |> resize_to_fill(dimensions)
+    |> gravity("NorthWest")
+    |> custom("crop", "#{crop_dimensions}+0+0")
+    |> resize(dimensions)
     |> save(in_place: true)
 
     {_, file_data} = File.read(path)
