@@ -8,5 +8,19 @@ function cleanup {
 trap cleanup EXIT
 redis-server &
 REDIS_PID=$!
-mix deps.get
-mix phoenix.server
+if [ "$MIX_ENV" == "prod" ]
+then
+  echo "Deploying"
+  npm install -g brunch
+  npm install --production
+  mix local.hex --force
+  mix deps.get --only prod --force
+  mix compile
+  brunch build --production
+  mix phoenix.digest
+  PORT=$PORT mix phoenix.server
+else
+  mix deps.get
+  mix compile
+  mix phoenix.server
+fi

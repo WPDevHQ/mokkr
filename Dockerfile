@@ -28,6 +28,7 @@ RUN n 6.3.1
 RUN gem install bundler
 
 RUN mix local.hex --force
+RUN mix local.rebar --force
 RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
 
 ADD xvfb /etc/init.d/xvfb
@@ -38,8 +39,5 @@ WORKDIR /app
 RUN chmod a+x start.sh
 RUN npm install
 RUN bundle install
-RUN mix deps.get --only-prod
-RUN mix local.rebar --force
-RUN mix compile
 EXPOSE 7054
 CMD ./start.sh
