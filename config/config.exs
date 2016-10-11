@@ -33,7 +33,7 @@ config :exq,
   host: "127.0.0.1",
   port: 6379,
   namespace: "exq",
-  concurrency: 15,
+  concurrency: 5,
   scheduler_enable: true,
   max_retries: 0,
   queues: ["default"]

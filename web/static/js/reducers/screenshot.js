@@ -1,7 +1,6 @@
 import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL } from '../actions';
 
 const initialState = {
-  channel: null,
   sessionId: null,
   isLoading: false,
   url: null,
@@ -63,17 +62,19 @@ function mockup(state = initialState, action) {
           { isLoading: action.isLoading }
       );
     case SET_URL:
+      const sessionId = state.sessionId;
+
       return Object.assign({},
         initialState,
         {
           url: action.url,
+          sessionId: sessionId,
         }
       );
     case SOCKET_CONNECTED:
       return Object.assign({},
         state,
         {
-          channel: action.channel,
           sessionId: action.sessionId,
         }
       );

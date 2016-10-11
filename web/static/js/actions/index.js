@@ -56,7 +56,6 @@ export const setSocket = (() => (
     channel.join().receive('ok', () => {
       dispatch({
         type: SOCKET_CONNECTED,
-        channel,
         sessionId,
       });
     });
