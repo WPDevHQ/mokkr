@@ -27,6 +27,7 @@ caps['version'] = '53.0'
 caps['recordVideo'] = false
 caps['recordScreenshots'] = false
 caps['screenResolution'] = "1920x1080"
+caps['autoAcceptAlerts'] = true
 
 if options[:device]
   caps['chromeOptions'] = {
@@ -38,14 +39,18 @@ driver = Selenium::WebDriver.for(:remote,
                                  :url => "https://wannabefro:#{ENV['ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub",
                                  :desired_capabilities => caps)
 
-driver.get(options[:url])
-driver.execute_script("document.documentElement.style.overflow = 'hidden';")
+begin
+  driver.get(options[:url])
+  driver.switch_to.alert.dismiss rescue Selenium::WebDriver::Error::NoAlertOpenError
 
-path = "./#{SecureRandom.hex}.png"
+  driver.execute_script("document.documentElement.style.overflow = 'hidden';")
 
-driver.save_screenshot(path)
+  path = "./#{SecureRandom.hex}.png"
+  driver.save_screenshot(path)
 
-result = {path: path}
-print result.to_json
+  result = {path: path}
+  print result.to_json
 
-driver.quit
+ensure
+  driver.quit
+end
