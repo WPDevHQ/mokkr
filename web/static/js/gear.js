@@ -7,6 +7,7 @@ class Gear {
     this.angleTurn = this.angle * this.direction;
     this.bbox = this.element.getBBox();
     this.rotate = false;
+    this.currentAngle = 0;
   }
 
   rotateGear() {
@@ -14,8 +15,8 @@ class Gear {
       return;
     }
 
-    this.element.transform(`r0,${this.bbox.cx},${this.bbox.cy}`);
-    this.element.animate({ transform: `r${this.angleTurn},${this.bbox.cx},${this.bbox.cy}` }, 8000, mina.linear, this.rotateGear.bind(this));
+    this.currentAngle += this.angleTurn;
+    this.element.animate({ transform: `r${this.currentAngle},${this.bbox.cx},${this.bbox.cy}` }, 250, mina.linear, this.rotateGear.bind(this));
   }
 
   start() {

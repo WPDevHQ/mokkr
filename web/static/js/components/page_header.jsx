@@ -29,9 +29,9 @@ class pageHeader extends React.Component {
 
     Snap.load('/images/gears.svg', (f) => {
       // set up gears
-      const gear1 = new Gear(f, 'gear1', 1, 360);
-      const gear2 = new Gear(f, 'gear2', -1, 864);
-      const gear3 = new Gear(f, 'gear3', 1, 540);
+      const gear1 = new Gear(f, 'gear1', 1, 20);
+      const gear2 = new Gear(f, 'gear2', -1, 48);
+      const gear3 = new Gear(f, 'gear3', 1, 30);
 
       this.setState({ gears: [gear1, gear2, gear3] });
 
