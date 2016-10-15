@@ -1,6 +1,9 @@
 require "selenium/webdriver"
 require "optparse"
 require "securerandom"
+require "dotenv"
+
+Dotenv.load
 
 options = {}
 OptionParser.new do |opts|
