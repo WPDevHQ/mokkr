@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Snap from 'snapsvg';
 import TakeScreenshot from '../containers/take_screenshot';
+import ScreenshotError from './screenshot_error';
 import Gear from '../gear';
 
 class pageHeader extends React.Component {
@@ -48,13 +49,18 @@ class pageHeader extends React.Component {
         <div className="l-content">
           <h1 className="m-page-header__title">Create responsive mockups</h1>
           <TakeScreenshot />
+          <ScreenshotError error={this.props.error} />
         </div>
       </header>
     );
   }
 }
 
-const mapStateToProps = state => ({ isLoading: state.mockup.isLoading });
+const mapStateToProps = state => ({ isLoading: state.mockup.isLoading, error: state.mockup.error });
+
+pageHeader.propTypes = {
+  error: React.PropTypes.string,
+};
 
 const PageHeader = connect(mapStateToProps)(pageHeader);
 

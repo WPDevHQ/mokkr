@@ -1,9 +1,10 @@
-import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL } from '../actions';
+import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL, SCREENSHOT_ERROR } from '../actions';
 
 const initialState = {
   sessionId: null,
   isLoading: false,
   url: null,
+  error: null,
   screenshots: {
     iMac: {
       background: 'images/imac.png',
@@ -62,13 +63,11 @@ function mockup(state = initialState, action) {
           { isLoading: action.isLoading }
       );
     case SET_URL:
-      const sessionId = state.sessionId;
-
       return Object.assign({},
         initialState,
         {
           url: action.url,
-          sessionId: sessionId,
+          sessionId: state.sessionId,
         }
       );
     case SOCKET_CONNECTED:
@@ -76,6 +75,14 @@ function mockup(state = initialState, action) {
         state,
         {
           sessionId: action.sessionId,
+        }
+      );
+    case SCREENSHOT_ERROR:
+      return Object.assign({},
+        initialState,
+        {
+          error: action.error,
+          sessionId: state.sessionId,
         }
       );
     default:

@@ -35,6 +35,10 @@ defmodule Mockup.ScreenshotChannel do
     Endpoint.broadcast("screenshots:#{session_id}", "screenshot:complete", screenshot)
   end
 
+  def error(error, session_id) do
+    Endpoint.broadcast("screenshots:#{session_id}", "screenshot:error", error)
+  end
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

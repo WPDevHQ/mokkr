@@ -39,12 +39,14 @@ if options[:device]
 end
 
 driver = Selenium::WebDriver.for(:remote,
-                                 :url => "https://wannabefro:#{ENV['ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub",
+                                 :url => "https://#{ENV['ACCESS_USERNAME']}:#{ENV['ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub",
                                  :desired_capabilities => caps)
 
 begin
   driver.get(options[:url])
   driver.switch_to.alert.dismiss rescue Selenium::WebDriver::Error::NoAlertOpenError
+
+  raise "404" if driver.title.include?("is not available")
 
   driver.execute_script("document.documentElement.style.overflow = 'hidden';")
 
@@ -53,7 +55,6 @@ begin
 
   result = {path: path}
   print result.to_json
-
 ensure
   driver.quit
 end

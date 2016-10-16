@@ -86,5 +86,12 @@ export const setSocket = (() => (
         });
       }
     });
+
+    channel.on('screenshot:error', () => {
+      dispatch({
+        type: SCREENSHOT_ERROR,
+        error: 'Sorry something went wrong. Make sure that the URL is correct and try again.',
+      });
+    });
   }
 ));
