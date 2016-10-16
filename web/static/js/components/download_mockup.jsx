@@ -34,6 +34,7 @@ const DownloadMockup = ({ previewClass, downloadable, url }) => {
 DownloadMockup.propTypes = {
   previewClass: React.PropTypes.string.isRequired,
   downloadable: React.PropTypes.bool.isRequired,
+  url: React.PropTypes.string,
 };
 
 export default DownloadMockup;
