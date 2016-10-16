@@ -26,12 +26,28 @@ export const screenshotError = (error => ({
   error,
 }));
 
-export const fetchScreenshot = (url => (
+const fetchScreenshot = (url => (
   (dispatch, getState) => {
     const sessionId = getState().mockup.sessionId;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
     fetch(`api/screenshot?url=${url}&session=${sessionId}`);
+  }
+));
+
+export const waitForSocketThenFetch = (url => (
+  (dispatch, getState) => {
+    const getSessionId = () => {
+      if (getState().mockup.sessionId !== null) {
+        dispatch(fetchScreenshot(url));
+      } else {
+        setTimeout(() => {
+          getSessionId();
+        }, 250);
+      }
+    };
+
+    getSessionId();
   }
 ));
 
