@@ -3,7 +3,7 @@ import canvg from 'canvg-origin';
 import { saveAs } from 'file-saver';
 import 'blueimp-canvas-to-blob';
 
-const DownloadMockup = ({ previewClass, downloadable }) => {
+const DownloadMockup = ({ previewClass, downloadable, url }) => {
   const download = () => {
     let svg = document.getElementsByClassName(previewClass)[0];
     svg = svg.cloneNode(true);
@@ -15,7 +15,7 @@ const DownloadMockup = ({ previewClass, downloadable }) => {
     canvas.width = svg.getAttribute('width');
     canvg(canvas, svg.outerHTML.trim(), { renderCallback: () => {
       canvas.toBlob((blob) => {
-        saveAs(blob, 'mockup.png');
+        saveAs(blob, `${url}-mockup.png`);
         canvas.remove();
         svg.remove();
       });

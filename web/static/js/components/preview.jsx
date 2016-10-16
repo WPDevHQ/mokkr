@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ScreenshotPreview from './screenshot_preview';
 import DownloadMockup from './download_mockup';
 
-const preview = ({ screenshots }) => {
+const preview = ({ screenshots, url }) => {
   const downloadable = () => (
     Object.keys(screenshots).every(s => (
       screenshots[s].src.length !== 0
@@ -17,17 +17,19 @@ const preview = ({ screenshots }) => {
           { Object.keys(screenshots).map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
         </svg>
       </div>
-      <DownloadMockup previewClass="m-scene" downloadable={downloadable()} />
+      <DownloadMockup previewClass="m-scene" url={url} downloadable={downloadable()} />
     </section>
   );
 };
 
 preview.propTypes = {
   screenshots: React.PropTypes.instanceOf(Object),
+  url: React.PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   screenshots: state.mockup.screenshots,
+  url: state.mockup.url,
 });
 
 const Preview = connect(mapStateToProps)(preview);
