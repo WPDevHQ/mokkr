@@ -9,7 +9,8 @@
     }
   },
   "globals": {
-    "mina": true
+    "mina": true,
+    "ga": true
   },
   "rules": {
     "react/require-extension": "off",

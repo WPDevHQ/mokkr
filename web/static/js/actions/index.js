@@ -26,8 +26,17 @@ export const screenshotError = (error => ({
   error,
 }));
 
+const trackEvent = (url => (
+  ga('send', 'event', {
+    eventCategory: 'Screenshots',
+    eventAction: 'capture',
+    eventValue: url,
+  })
+));
+
 const fetchScreenshot = (url => (
   (dispatch, getState) => {
+    trackEvent(url);
     const sessionId = getState().mockup.sessionId;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
