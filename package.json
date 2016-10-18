@@ -1,4 +1,35 @@
 {
+  "name": "mokkr",
+  "version": "1.0.0",
+  "description": "Tool for generating responsive mockups with screenshots",
+  "homepage": "http://mokkr.brightrobots.io",
+  "bugs": "https://github.com/brightrobots/mokkr/issues",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Jusna Begum",
+      "email": "jb@juweez.co.uk",
+      "url": "http://juweez.co.uk"
+    },
+    {
+      "name": "Sam McTaggart",
+      "email": "sam.mctaggart@gmail.com"
+    },
+    {
+      "name": "Scott Cariss",
+      "email": "scott@l3rady.com",
+      "url": "http://l3rady.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brightrobots/mokkr"
+  },
+  "engines": {
+    "node": "6.3.x",
+    "npm": "3.10.x"
+  },
+  "private": true,
   "scripts": {
     "lint": "eslint --quiet --ext .jsx --ext .js web/static/js/**; exit 0"
   },
