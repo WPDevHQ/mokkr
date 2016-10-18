@@ -16,6 +16,7 @@
     <meta name="application-name" content="Responsive Mokkr">
     <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
     <meta name="theme-color" content="#4e3275">
+    <meta name="description" content="Create responsive mockups of any site for free.">
 
     <title>Responsive Mokkr</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
