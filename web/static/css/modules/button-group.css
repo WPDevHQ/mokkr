@@ -1,0 +1,8 @@
+.m-button-group {
+  display: flex;
+  justify-content: center;
+}
+
+.m-button-group__item:not(:first-child) {
+  margin-left: 10px;
+}

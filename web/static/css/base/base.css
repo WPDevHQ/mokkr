@@ -1,5 +1,6 @@
 * {
   letter-spacing: 1px;
+  box-sizing: border-box;
 }
 
 html {
@@ -31,8 +32,14 @@ h6 {
   line-height: 1.15;
 }
 
-input {
+input,
+button {
   color: $color-black;
+}
+
+input {
+  padding: 0.5em;
+  border: 1px solid $color-medium-grey;
 }
 
 li {

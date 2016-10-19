@@ -85,6 +85,7 @@ exports.config = {
       "phoenix_html",
       "react",
       "react-dom",
+      "react-copy-to-clipboard",
       "react-redux",
       "redux",
       "redux-thunk",

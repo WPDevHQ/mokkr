@@ -1,0 +1,8 @@
+.m-input-group {
+  display: flex;
+  height: 30px;
+
+  input {
+    border-right: 0;
+  }
+}

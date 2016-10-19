@@ -14,8 +14,7 @@ const aboutSection = ({ url }) => (
 
       <h2>About Mokkr</h2>
       <p>
-        Created by <a href="https://twitter.com/juweez">@juweez</a> and
-        <a href="https://twitter.com/wannabefro">@wannabefro</a>, this free
+        Created by <a href="https://twitter.com/juweez">@juweez</a> and <a href="https://twitter.com/wannabefro">@wannabefro</a>, this free
         responsive mockup generator is a huge time saver for web developers
         and designers.
       </p>

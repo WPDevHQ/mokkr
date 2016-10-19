@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ScreenshotPreview from './screenshot_preview';
 import DownloadMockup from './download_mockup';
+import ShareButton from './share_button';
 
 class preview extends React.Component {
   get downloadable() {
@@ -22,7 +23,14 @@ class preview extends React.Component {
             { activeDevices.map(s => <ScreenshotPreview key={s} {...screenshots[s]} />) }
           </svg>
         </div>
-        <DownloadMockup previewClass="m-scene" url={url} downloadable={this.downloadable} />
+        <div className="m-button-group">
+          <div className="m-button-group__item">
+            <DownloadMockup previewClass="m-scene" url={url} downloadable={this.downloadable} />
+          </div>
+          <div className="m-button-group__item">
+            <ShareButton className="m-button-group__item" downloadable={this.downloadable} />
+          </div>
+        </div>
       </section>
     );
   }
