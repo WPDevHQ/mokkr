@@ -37,10 +37,10 @@ const trackEvent = (url => (
 const fetchScreenshot = (url => (
   (dispatch, getState) => {
     trackEvent(url);
-    const sessionId = getState().mockup.sessionId;
+    const { sessionId, activeDevices } = getState().mockup;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
-    fetch(`api/screenshot?url=${url}&session=${sessionId}`);
+    fetch(`api/screenshot?url=${url}&session=${sessionId}&devices=${activeDevices}`);
   }
 ));
 
