@@ -1,4 +1,5 @@
 export default {
+  activeDevices: ['iMac', 'iPad', 'iPhone'],
   iMac: {
     background: 'images/imac.png',
     src: '',
