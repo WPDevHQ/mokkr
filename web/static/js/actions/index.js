@@ -37,10 +37,10 @@ const trackEvent = (url => (
 const fetchScreenshot = (url => (
   (dispatch, getState) => {
     trackEvent(url);
-    const sessionId = getState().mockup.sessionId;
+    const { sessionId, activeDevices } = getState().mockup;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
-    fetch(`api/screenshot?url=${url}&session=${sessionId}`);
+    fetch(`api/screenshot?url=${url}&session=${sessionId}&devices=${activeDevices}`);
   }
 ));
 
@@ -60,8 +60,8 @@ export const waitForSocketThenFetch = (url => (
   }
 ));
 
-const finishedLoading = (screenshots => (
-  Object.keys(screenshots).every(s => (
+const finishedLoading = ((screenshots, activeDevices) => (
+  activeDevices.every(s => (
     screenshots[s].src.length !== 0
   ))
 ));
@@ -102,9 +102,9 @@ export const setSocket = (() => (
         screenshot: newScreenshot,
       });
 
-      const screenshots = getState().mockup.screenshots;
+      const { screenshots, activeDevices } = getState().mockup;
 
-      if (finishedLoading(screenshots)) {
+      if (finishedLoading(screenshots, activeDevices)) {
         dispatch({
           type: LOADING_CHANGED,
           isLoading: false,
