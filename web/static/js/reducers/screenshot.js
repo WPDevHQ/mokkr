@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   url: null,
   error: null,
+  activeDevices: ['iMac', 'iPad', 'iPhone'],
   screenshots: devices,
 };
 

@@ -60,8 +60,8 @@ export const waitForSocketThenFetch = (url => (
   }
 ));
 
-const finishedLoading = (screenshots => (
-  Object.keys(screenshots).every(s => (
+const finishedLoading = ((screenshots, activeDevices) => (
+  activeDevices.every(s => (
     screenshots[s].src.length !== 0
   ))
 ));
@@ -102,9 +102,9 @@ export const setSocket = (() => (
         screenshot: newScreenshot,
       });
 
-      const screenshots = getState().mockup.screenshots;
+      const { screenshots, activeDevices } = getState().mockup;
 
-      if (finishedLoading(screenshots)) {
+      if (finishedLoading(screenshots, activeDevices)) {
         dispatch({
           type: LOADING_CHANGED,
           isLoading: false,
