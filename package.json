@@ -33,7 +33,6 @@
   "scripts": {
     "lint": "eslint --quiet --ext .jsx --ext .js web/static/js/**; exit 0"
   },
-  "repository": {},
   "dependencies": {
     "babel-brunch": "~6.0.0",
     "babel-preset-react": "^6.11.1",
