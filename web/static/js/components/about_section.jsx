@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const AboutSection = () => (
+const aboutSection = ({ url }) => (
   <section className="l-section-alt">
     <div className="l-content l-content--wide text-content">
       <h2>How it works</h2>
@@ -8,7 +9,7 @@ const AboutSection = () => (
         <li>Simply enter your website URL in the input field and click “Generate”</li>
         <li>Click “Download image” to download a PNG of your mockup</li>
         <li>Share a link to show others your mockup by using
-        "http://mokkr.brightrobots.io/?url=http://www.yoursite.com"</li>
+        "https://mokkr.brightrobots.io/?url={url || 'yoursite.com'}"</li>
       </ol>
 
       <h2>About Mokkr</h2>
@@ -32,5 +33,13 @@ const AboutSection = () => (
     </div>
   </section>
 );
+
+
+aboutSection.propTypes = {
+  url: React.PropTypes.string,
+};
+
+const mapStateToProps = state => ({ url: state.mockup.url });
+const AboutSection = connect(mapStateToProps)(aboutSection);
 
 export default AboutSection;
