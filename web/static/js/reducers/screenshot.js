@@ -1,4 +1,5 @@
-import { SOCKET_CONNECTED, SET_SCREENSHOT, LOADING_CHANGED, SET_URL, SCREENSHOT_ERROR } from '../actions';
+import { SET_SCREENSHOT, LOADING_CHANGED, SET_URL, SCREENSHOT_ERROR } from '../actions/screenshot';
+import { SOCKET_CONNECTED } from '../actions/socket';
 import devices from '../devices';
 
 const initialState = {

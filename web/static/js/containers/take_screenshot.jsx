@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { waitForSocketThenFetch } from '../actions';
+import { waitForSocketThenFetch } from '../actions/socket';
 
 class takeScreenshot extends React.Component {
   constructor(props) {
