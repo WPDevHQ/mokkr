@@ -7,6 +7,7 @@ To start your Phoenix app:
   * Install Ruby dependencies with `bundle install`
   * Make sure you have redis running `redis-server`
   * Set your env variables. Look in `.env.example` to see what needs to be set.
+  * Create your database with `mix ecto.create`
   * Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
