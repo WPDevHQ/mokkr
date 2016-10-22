@@ -34,5 +34,5 @@ export default {
     offsetLeft: '11',
     screenshotWidth: '135',
     screenshotHeight: '240',
-  }
-}
+  },
+};

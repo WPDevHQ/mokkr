@@ -5,15 +5,15 @@ import DownloadMockup from './download_mockup';
 
 class preview extends React.Component {
   get downloadable() {
-    let { activeDevices, screenshots } = this.props;
+    const { activeDevices, screenshots } = this.props;
 
     return activeDevices.every(s => (
       screenshots[s].src.length !== 0
-    ))
-  };
+    ));
+  }
 
   render() {
-    let { activeDevices, screenshots, url } = this.props;
+    const { activeDevices, screenshots, url } = this.props;
 
     return (
       <section className="l-content u-text-center">
@@ -26,11 +26,13 @@ class preview extends React.Component {
       </section>
     );
   }
-};
+}
 
 preview.propTypes = {
   screenshots: React.PropTypes.instanceOf(Object),
-  activeDevices: React.PropTypes.array,
+  activeDevices: React.PropTypes.arrayOf(
+    React.PropTypes.string
+  ),
   url: React.PropTypes.string,
 };
 
