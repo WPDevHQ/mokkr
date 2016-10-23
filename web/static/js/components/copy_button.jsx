@@ -3,6 +3,7 @@ import IconCopy from '../icons/icon_copy';
 
 const CopyButton = () => {
   const onClick = (e) => {
+    e.currentTarget.blur();
     e.currentTarget.setAttribute('aria-label', 'Copied!');
   };
 
