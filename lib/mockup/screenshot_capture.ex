@@ -1,4 +1,4 @@
-defmodule Mockup.Screenshot do
+defmodule Mockup.ScreenshotCapture do
   import Mogrify
   alias Poison.Parser
 
