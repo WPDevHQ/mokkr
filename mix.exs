@@ -41,7 +41,12 @@ defmodule Mockup.Mixfile do
      {:credo, "~> 0.4", only: [:dev, :test]},
      {:mogrify, "~> 0.4.0"},
      {:exq, "~> 0.7.2"},
-     {:poison, "~> 2.0"}]
+     {:poison, "~> 2.0"},
+     {:arc, "~> 0.6.0-rc3"},
+     {:ex_aws, "~> 1.0.0-rc3"},
+     {:hackney, "~> 1.5"},
+     {:sweet_xml, "~> 0.5"},
+     {:arc_ecto, "~> 0.5.0-rc1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
