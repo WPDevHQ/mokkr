@@ -33,7 +33,7 @@ defmodule Mockup.ChannelCase do
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Mockup.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(Mockup.Repo, {:shared, self()})
     end
 
     :ok
