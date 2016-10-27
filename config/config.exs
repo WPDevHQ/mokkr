@@ -35,6 +35,9 @@ config :exq,
   queues: ["default"]
 
 config :mockup, ecto_repos: [Mockup.Repo]
+config :mockup, :screenshot_capture, Mockup.ScreenshotCapture
+
+config :arc, bucket: {:system, "S3_BUCKET"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

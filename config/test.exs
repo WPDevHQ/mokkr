@@ -17,3 +17,12 @@ config :mockup, Mockup.Repo,
   database: "mockup_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :mockup, :screenshot_capture, Mockup.FakeScreenshotCaputre
+config :arc, storage: Arc.Storage.Local
+
+config :exq,
+  name: Exq,
+  namespace: "test",
+  queues: ["default"],
+  test_with_local_redis: true
