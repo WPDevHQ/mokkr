@@ -41,7 +41,7 @@ defmodule Mockup.API.ScreenshotController do
         end)
 
         Enum.each(devices_to_capture, fn(screensize) ->
-          Exq.enqueue(Exq, "default", ScreenshotWorker, [url, screenshot.id, session_id, screensize])
+          Exq.enqueue(Exq, "default", ScreenshotWorker, [screenshot.id, session_id, screensize])
         end)
         :ok
       {:error, _} -> :error

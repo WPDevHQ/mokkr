@@ -59,12 +59,9 @@ defmodule Mockup.ScreenshotCapture do
     |> resize(dimensions)
     |> save(in_place: true)
 
-    {_, file_data} = File.read(path)
-    File.rm(path)
-
     %{
       name: name,
-      src: Base.encode64(file_data)
+      path: path
     }
   end
 end

@@ -14,6 +14,6 @@ defmodule Mockup.FakeScreenshotCaputre do
 
   def capture(_url, _options) do
     :timer.sleep(1000)
-    {:ok, %{screenshot: "screenshot"}}
+    {:ok, %{name: "iMac", path: Path.join([Mockup.Endpoint.config(:root), "test", "support", "example.png"])}}
   end
 end
