@@ -2,6 +2,8 @@ defmodule Mockup.Screenshot do
   use Mockup.Web, :model
   alias Mockup.Version
 
+  @url_regex ~r/^(http|https|ftp|ftps):\/\/(([a-z0-9]+\:)?[a-z0-9]+\@)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+
   schema "screenshots" do
     field :url, :string
 
@@ -16,5 +18,7 @@ defmodule Mockup.Screenshot do
     struct
     |> cast(params, [:url])
     |> validate_required([:url])
+    |> validate_format(:url, @url_regex)
+    |> unique_constraint(:url)
   end
 end

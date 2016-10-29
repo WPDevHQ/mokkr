@@ -9,6 +9,7 @@ erl_crash.dump
 
 # Static artifacts
 /node_modules
+/uploads
 npm-debug.log
 phantomjsdriver.log
 dump.rdb

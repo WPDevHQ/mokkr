@@ -32,7 +32,7 @@ defmodule Mockup.Image do
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do
     scope = scope |> Repo.preload(:screenshot)
-    "uploads/#{scope.screenshot.url}"
+    "uploads/#{URI.parse(scope.screenshot.url).host}"
   end
 
   # Provide a default URL if there hasn't been a file uploaded

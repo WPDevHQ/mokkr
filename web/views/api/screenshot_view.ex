@@ -16,4 +16,8 @@ defmodule Mockup.API.ScreenshotView do
 
   def render("show.json", _assigns) do
   end
+
+  def render("error.json", %{message: message}) do
+    %{message: message}
+  end
 end

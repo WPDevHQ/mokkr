@@ -25,7 +25,7 @@ defmodule Mockup.API.ScreenshotControllerTest do
     @tag token: "CachedScreenshots"
 
     test "when there are cached screenshots", %{params: params} do
-      screenshot = Screenshot.changeset(%Screenshot{}, %{url: "example.com"}) |> Repo.insert!
+      screenshot = Screenshot.changeset(%Screenshot{}, %{url: "http://example.com"}) |> Repo.insert!
 
       versions = [
         Version.changeset(%Version{}, %{screenshot_id: screenshot.id, name: "iMac", image: Path.join([Mockup.Endpoint.config(:root), "test", "support", "example.png"])}),

@@ -31,31 +31,11 @@ defmodule Mockup.ScreenshotCapture do
     },
   ]
 
-  @url_regex ~r/^(http|https|ftp|ftps):\/\/(([a-z0-9]+\:)?[a-z0-9]+\@)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
-
   def screensizes do
     @screensizes
   end
 
-  def capture(url, options) do
-    formatted_url = if url |> String.starts_with?("http") do
-      url
-    else
-      "http://" <> url
-    end
-
-    case validate_uri(formatted_url) do
-      {:ok, _} ->
-        if Regex.match?(@url_regex, formatted_url) do
-          capture_screenshot(formatted_url, options)
-        else
-          {:error, %{message: "Not a valid url"}}
-        end
-      {:error, _} -> {:error, %{message: "Not a valid url"}}
-    end
-  end
-
-  defp capture_screenshot(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions, "crop_dimensions" => crop_dimensions}) do
+  def capture(url, %{"name" => name, "options" => options, "final_dimensions" => dimensions, "crop_dimensions" => crop_dimensions}) do
     {result, _} = System.cmd("ruby", ["saucelabs.rb", "--url=#{url}"] ++ options)
 
     case Parser.parse(result) do
@@ -86,15 +66,5 @@ defmodule Mockup.ScreenshotCapture do
       name: name,
       src: Base.encode64(file_data)
     }
-  end
-
-  defp validate_uri(str) do
-    uri = URI.parse(str)
-
-    case uri do
-      %URI{scheme: nil} -> {:error, uri}
-      %URI{host: nil} -> {:error, uri}
-      uri -> {:ok, uri}
-    end
   end
 end
