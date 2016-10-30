@@ -29,7 +29,8 @@ defmodule Mockup.ScreenshotWorker do
   end
 
   defp create_version(screenshot_capture, screenshot_id) do
-    {:ok, version} = Version.changeset(%Version{}, %{name: screenshot_capture.name, image: screenshot_capture.path, screenshot_id: screenshot_id})
+    {:ok, version} = %Version{}
+    |> Version.changeset(%{name: screenshot_capture.name, image: screenshot_capture.path, screenshot_id: screenshot_id})
     |> Repo.insert
     version
   end

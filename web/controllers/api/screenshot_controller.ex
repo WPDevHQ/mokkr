@@ -7,7 +7,7 @@ defmodule Mockup.API.ScreenshotController do
 
   def show(conn, %{"url" => url, "session" => session_id, "devices" => devices, "force" => _force}) do
     formatted_url = ensure_url_is_http(url)
-    screenshot = Repo.get_by(Screenshot, url: formatted_url) |> Repo.preload(:versions)
+    screenshot = Screenshot |> Repo.get_by(url: formatted_url) |> Repo.preload(:versions)
 
     case take_screenshots(formatted_url, session_id, devices, screenshot) do
       :ok -> render(conn, "show.json")
@@ -45,11 +45,11 @@ defmodule Mockup.API.ScreenshotController do
   end
 
   defp take_screenshots(url, session_id, devices, screenshot) do
-    screenshot = unless screenshot do
-      {:ok, new_screenshot} = Screenshot.changeset(%Screenshot{}, %{url: url}) |> Repo.insert
-      new_screenshot
-    else
+    screenshot = if screenshot do
       screenshot
+    else
+      {:ok, new_screenshot} = %Screenshot{} |> Screenshot.changeset(%{url: url}) |> Repo.insert
+      new_screenshot
     end
 
     device_array = String.split(devices, ",")

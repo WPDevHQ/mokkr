@@ -10,10 +10,12 @@ const ScreenshotInfo = ({ lastUpdated, url, dispatch }) => {
 
 
   if (lastUpdated) {
-    return <p>
-      Screenshots taken {moment(lastUpdated).fromNow()}.
-      To generate fresh screenshots <a href="#" onClick={onClick}>click here</a>.
-      </p>;
+    return (
+      <p>
+        Screenshots taken {moment(lastUpdated).fromNow()}.
+        To generate fresh screenshots <a href="#force" onClick={onClick}>click here</a>.
+      </p>
+    );
   }
 
   return null;

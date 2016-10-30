@@ -2,7 +2,7 @@ export const LOADING_CHANGED = 'LOADING_CHANGED';
 export const SET_SCREENSHOT = 'SET_SCREENSHOT';
 export const SCREENSHOT_ERROR = 'SCREENSHOT_ERROR';
 export const SET_URL = 'SET_URL';
-export const SET_LAST_UPDATED= 'SET_LAST_UPDATED';
+export const SET_LAST_UPDATED = 'SET_LAST_UPDATED';
 
 export const loadingChanged = (isLoading => ({
   type: LOADING_CHANGED,
@@ -37,29 +37,14 @@ const trackEvent = (url => (
   })
 ));
 
-export const fetchScreenshot = ((url, options={}) => (
-  (dispatch, getState) => {
-    trackEvent(url);
-    const { sessionId, activeDevices } = getState().mockup;
-    dispatch(setUrl(url));
-    dispatch(loadingChanged(true));
-    let params = `url=${url}&session=${sessionId}&devices=${activeDevices}`;
-    if (options.force)
-      params = `${params}&force=true`
-    fetch(`api/screenshot?${params}`).then(response => {
-      if (response.ok) {
-        response.json().then(data => {
-          if (data && data.screenshots) {
-            dispatch(setLastUpdated(data.last_updated_at));
-            data.screenshots.forEach(s => dispatch(screenshotOnComplete(s)));
-          }
-        });
-      } else {
-        dispatch(screenshotOnError());
-      }
+export const screenshotOnError = () => (
+  (dispatch) => {
+    dispatch({
+      type: SCREENSHOT_ERROR,
+      error: 'Sorry something went wrong. Make sure that the URL is correct and try again.',
     });
   }
-));
+);
 
 export const finishedLoading = ((screenshots, activeDevices) => (
   activeDevices.every(s => (
@@ -96,11 +81,27 @@ export const screenshotOnComplete = (screenshot => (
   }
 ));
 
-export const screenshotOnError = () => (
-  (dispatch) => {
-    dispatch({
-      type: SCREENSHOT_ERROR,
-      error: 'Sorry something went wrong. Make sure that the URL is correct and try again.',
+export const fetchScreenshot = ((url, options = {}) => (
+  (dispatch, getState) => {
+    trackEvent(url);
+    const { sessionId, activeDevices } = getState().mockup;
+    dispatch(setUrl(url));
+    dispatch(loadingChanged(true));
+    let params = `url=${url}&session=${sessionId}&devices=${activeDevices}`;
+    if (options.force) {
+      params = `${params}&force=true`;
+    }
+    fetch(`api/screenshot?${params}`).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          if (data && data.screenshots) {
+            dispatch(setLastUpdated(data.last_updated_at));
+            data.screenshots.forEach(s => dispatch(screenshotOnComplete(s)));
+          }
+        });
+      } else {
+        dispatch(screenshotOnError());
+      }
     });
   }
-);
+));
