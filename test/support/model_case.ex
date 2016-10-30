@@ -29,7 +29,7 @@ defmodule Mockup.ModelCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Mockup.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.Sandbox.Sandbox.mode(Mockup.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Mockup.Repo, {:shared, self()})
     end
 
     :ok
@@ -59,7 +59,7 @@ defmodule Mockup.ModelCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&MyApp.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&Mockup.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end
