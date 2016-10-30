@@ -54,6 +54,8 @@ export const fetchScreenshot = ((url, options={}) => (
             data.screenshots.forEach(s => dispatch(screenshotOnComplete(s)));
           }
         });
+      } else {
+        dispatch(screenshotOnError());
       }
     });
   }
