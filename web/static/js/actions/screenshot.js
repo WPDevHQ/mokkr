@@ -2,6 +2,7 @@ export const LOADING_CHANGED = 'LOADING_CHANGED';
 export const SET_SCREENSHOT = 'SET_SCREENSHOT';
 export const SCREENSHOT_ERROR = 'SCREENSHOT_ERROR';
 export const SET_URL = 'SET_URL';
+export const SET_LAST_UPDATED= 'SET_LAST_UPDATED';
 
 export const loadingChanged = (isLoading => ({
   type: LOADING_CHANGED,
@@ -16,6 +17,11 @@ export const setScreenshot = (screenshot => ({
 export const setUrl = (url => ({
   type: SET_URL,
   url,
+}));
+
+export const setLastUpdated = (lastUpdated => ({
+  type: SET_LAST_UPDATED,
+  lastUpdated,
 }));
 
 export const screenshotError = (error => ({
@@ -37,7 +43,16 @@ export const fetchScreenshot = (url => (
     const { sessionId, activeDevices } = getState().mockup;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
-    fetch(`api/screenshot?url=${url}&session=${sessionId}&devices=${activeDevices}`);
+    fetch(`api/screenshot?url=${url}&session=${sessionId}&devices=${activeDevices}`).then(response => {
+      if (response.ok) {
+        response.json().then(data => {
+          if (data && data.screenshots) {
+            dispatch(setLastUpdated(data.last_updated_at));
+            data.screenshots.forEach(s => dispatch(screenshotOnComplete(s)));
+          }
+        });
+      }
+    });
   }
 ));
 

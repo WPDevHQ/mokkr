@@ -18,6 +18,6 @@ defmodule Mockup.Version do
     struct
     |> cast(params, [:name, :screenshot_id])
     |> cast_attachments(params, [:image])
-    |> validate_required([:name, :image])
+    |> validate_required([:name, :image, :screenshot_id])
   end
 end

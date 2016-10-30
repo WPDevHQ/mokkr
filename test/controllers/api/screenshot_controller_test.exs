@@ -39,5 +39,14 @@ defmodule Mockup.API.ScreenshotControllerTest do
       assert response["last_updated_at"] == Ecto.DateTime.to_string(screenshot.updated_at)
       assert Enum.count(response["screenshots"]) == 2
     end
+
+    test "when there is a cached screenshot but not the correct versions", %{params: params} do
+      Screenshot.changeset(%Screenshot{}, %{url: "http://example.com"}) |> Repo.insert!
+      build_conn |> get("api/screenshot", params)
+
+      {:ok, jobs} = Exq.Api.jobs(Exq.Api, "default")
+      assert Enum.count(Repo.all(Screenshot)) == 1
+      assert Enum.count(jobs) == 2,  "2 jobs not enqued"
+    end
   end
 end

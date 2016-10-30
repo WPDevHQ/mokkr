@@ -1,6 +1,6 @@
 defmodule Mockup.ScreenshotWorker do
   @screenshot_capture Application.get_env(:mockup, :screenshot_capture)
-  alias Mockup.{ScreenshotChannel, Repo, Version, Screenshot}
+  alias Mockup.{ScreenshotChannel, Repo, Version, Screenshot, Image}
 
   def perform(screenshot_id, session_id, options) do
     screenshot = Repo.get(Screenshot, screenshot_id)
@@ -13,7 +13,11 @@ defmodule Mockup.ScreenshotWorker do
         end
 
         touch_screenshot(screenshot)
-        ScreenshotChannel.complete(screenshot_capture, session_id)
+        cleanup_screenshot(screenshot_capture.path)
+        ScreenshotChannel.complete(
+          %{name: version.name, src: Image.url({version.image, version}, :original)},
+          session_id
+        )
       {:error, error}       -> ScreenshotChannel.error(error, session_id)
     end
   end
@@ -25,12 +29,19 @@ defmodule Mockup.ScreenshotWorker do
   end
 
   defp create_version(screenshot_capture, screenshot_id) do
-    Version.changeset(%Version{}, %{name: screenshot_capture.name, image: screenshot_capture.path, screenshot_id: screenshot_id})
+    {:ok, version} = Version.changeset(%Version{}, %{name: screenshot_capture.name, image: screenshot_capture.path, screenshot_id: screenshot_id})
     |> Repo.insert
+    version
   end
 
   defp touch_screenshot(screenshot) do
     changeset = Screenshot.changeset(screenshot, %{updated_at: Ecto.DateTime.utc})
     Repo.update(changeset)
+  end
+
+  defp cleanup_screenshot(path) do
+    unless Mix.env == :test do
+      File.rm(path)
+    end
   end
 end

@@ -30,7 +30,7 @@ const ScreenshotPreview = (props) => {
       height: screenshotHeight,
     };
 
-    screenshot = <image width={screenshotStyles.width} height={screenshotStyles.height} x={screenshotStyles.left} y={screenshotStyles.top} xlinkHref={`data:image/png;base64,${src}`} />;
+    screenshot = <image width={screenshotStyles.width} height={screenshotStyles.height} x={screenshotStyles.left} y={screenshotStyles.top} xlinkHref={src} />;
   }
 
   return (

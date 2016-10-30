@@ -92,7 +92,8 @@ exports.config = {
       "canvg-origin",
       "file-saver",
       "blueimp-canvas-to-blob",
-      "snapsvg"
+      "snapsvg",
+      "moment"
     ]
   }
 };

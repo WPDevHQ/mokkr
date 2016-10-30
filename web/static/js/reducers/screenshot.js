@@ -1,10 +1,11 @@
-import { SET_SCREENSHOT, LOADING_CHANGED, SET_URL, SCREENSHOT_ERROR } from '../actions/screenshot';
+import { SET_SCREENSHOT, LOADING_CHANGED, SET_URL, SCREENSHOT_ERROR, SET_LAST_UPDATED } from '../actions/screenshot';
 import { SOCKET_CONNECTED } from '../actions/socket';
 import devices from '../devices';
 
 const initialState = {
   sessionId: null,
   isLoading: false,
+  lastUpdated: null,
   url: null,
   error: null,
   activeDevices: ['iMac', 'iPad', 'iPhone'],
@@ -49,6 +50,13 @@ function mockup(state = initialState, action) {
         {
           error: action.error,
           sessionId: state.sessionId,
+        }
+      );
+    case SET_LAST_UPDATED:
+      return Object.assign({},
+        state,
+        {
+          lastUpdated: action.lastUpdated,
         }
       );
     default:

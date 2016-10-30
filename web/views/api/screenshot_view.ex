@@ -8,7 +8,7 @@ defmodule Mockup.API.ScreenshotView do
       screenshots: Enum.map(screenshots, fn(screenshot) ->
         %{
           name: screenshot.name,
-          image: Image.url({screenshot.image, screenshot}, :original)
+          src: Image.url({screenshot.image, screenshot}, :original)
         }
       end)
     }
