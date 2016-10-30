@@ -37,13 +37,16 @@ const trackEvent = (url => (
   })
 ));
 
-export const fetchScreenshot = (url => (
+export const fetchScreenshot = ((url, options={}) => (
   (dispatch, getState) => {
     trackEvent(url);
     const { sessionId, activeDevices } = getState().mockup;
     dispatch(setUrl(url));
     dispatch(loadingChanged(true));
-    fetch(`api/screenshot?url=${url}&session=${sessionId}&devices=${activeDevices}`).then(response => {
+    let params = `url=${url}&session=${sessionId}&devices=${activeDevices}`;
+    if (options.force)
+      params = `${params}&force=true`
+    fetch(`api/screenshot?${params}`).then(response => {
       if (response.ok) {
         response.json().then(data => {
           if (data && data.screenshots) {

@@ -22,9 +22,14 @@ defmodule Mockup.API.ScreenshotWorkerTest do
       ScreenshotWorker.perform(screenshot.id, "123", %{})
 
       previous_image = version.image
+      previous_screenshot_timestamp = screenshot.updated_at
+
       version = Repo.get(Version, version.id)
+      screenshot = Repo.get(Screenshot, screenshot.id)
+
       assert Enum.count(Repo.all(Version)) == 1
       assert version.image != previous_image
+      assert previous_screenshot_timestamp != screenshot.updated_at
     end
   end
 end

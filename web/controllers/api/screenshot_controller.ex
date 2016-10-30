@@ -5,6 +5,16 @@ defmodule Mockup.API.ScreenshotController do
 
   alias Mockup.{ScreenshotWorker, Repo, Screenshot}
 
+  def show(conn, %{"url" => url, "session" => session_id, "devices" => devices, "force" => _force}) do
+    formatted_url = ensure_url_is_http(url)
+    screenshot = Repo.get_by(Screenshot, url: formatted_url) |> Repo.preload(:versions)
+
+    case take_screenshots(formatted_url, session_id, devices, screenshot) do
+      :ok -> render(conn, "show.json")
+      :error -> conn |> put_status(500) |> render("error.json", %{message: "Sorry something went wrong"})
+    end
+  end
+
   def show(conn, %{"url" => url, "session" => session_id, "devices" => devices}) do
     formatted_url = ensure_url_is_http(url)
 

@@ -51,7 +51,7 @@ class pageHeader extends React.Component {
           <h1 className="m-page-header__title">Create responsive mockups</h1>
           <TakeScreenshot />
           <ScreenshotError error={this.props.error} />
-          <ScreenshotInfo lastUpdated={this.props.lastUpdated} />
+          <ScreenshotInfo lastUpdated={this.props.lastUpdated} url={this.props.url} dispatch={this.props.dispatch} />
         </div>
       </header>
     );
@@ -62,11 +62,13 @@ const mapStateToProps = state => ({
   isLoading: state.mockup.isLoading,
   error: state.mockup.error,
   lastUpdated: state.mockup.lastUpdated,
+  url: state.mockup.url,
 });
 
 pageHeader.propTypes = {
   error: React.PropTypes.string,
   lastUpdated: React.PropTypes.string,
+  url: React.PropTypes.string,
 };
 
 const PageHeader = connect(mapStateToProps)(pageHeader);

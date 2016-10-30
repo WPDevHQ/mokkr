@@ -35,8 +35,8 @@ defmodule Mockup.ScreenshotWorker do
   end
 
   defp touch_screenshot(screenshot) do
-    changeset = Screenshot.changeset(screenshot, %{updated_at: Ecto.DateTime.utc})
-    Repo.update(changeset)
+    query = "update screenshots set updated_at=$1 where id=$2"
+    Ecto.Adapters.SQL.query(Repo, query, [Ecto.DateTime.utc, screenshot.id])
   end
 
   defp cleanup_screenshot(path) do

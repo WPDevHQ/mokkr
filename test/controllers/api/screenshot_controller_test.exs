@@ -48,5 +48,24 @@ defmodule Mockup.API.ScreenshotControllerTest do
       assert Enum.count(Repo.all(Screenshot)) == 1
       assert Enum.count(jobs) == 2,  "2 jobs not enqued"
     end
+
+    @tag token: "Forcing screenshots to be regenerated"
+
+    test "when force is passed in the params" do
+      params = %{url: "example.com", session: "123", devices: "iMac,iPad", force: true}
+
+      screenshot = Screenshot.changeset(%Screenshot{}, %{url: "http://example.com"}) |> Repo.insert!
+
+      versions = [
+        Version.changeset(%Version{}, %{screenshot_id: screenshot.id, name: "iMac", image: Path.join([Mockup.Endpoint.config(:root), "test", "support", "example.png"])}),
+        Version.changeset(%Version{}, %{screenshot_id: screenshot.id, name: "iPad", image: Path.join([Mockup.Endpoint.config(:root), "test", "support", "example.png"])})
+      ]
+
+      Enum.each(versions, &Repo.insert!(&1))
+      build_conn |> get("api/screenshot", params)
+
+      {:ok, jobs} = Exq.Api.jobs(Exq.Api, "default")
+      assert Enum.count(jobs) == 2,  "2 jobs not enqued"
+    end
   end
 end
