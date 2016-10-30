@@ -13,7 +13,7 @@ const DownloadMockup = ({ previewClass, downloadable, url }) => {
     const canvas = document.createElement('canvas');
     canvas.height = svg.getAttribute('height');
     canvas.width = svg.getAttribute('width');
-    canvg(canvas, svg.outerHTML.trim(), { renderCallback: () => {
+    canvg(canvas, svg.outerHTML.trim(), { useCORS: true, renderCallback: () => {
       canvas.toBlob((blob) => {
         saveAs(blob, `${url}-mockup.png`);
         canvas.remove();
